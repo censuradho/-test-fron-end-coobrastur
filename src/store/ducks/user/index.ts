@@ -3,10 +3,10 @@ import { UserData, UserTypes } from './types'
 
 const baseUser: UserData = { token: '' }
 
-const reducerUser: Reducer = (state = baseUser, action) => {
+const reducerUser: Reducer<UserData> = (state = baseUser, action) => {
   switch (action.type) {
   case UserTypes.GET_TOKEN:
-    return action.payload
+    return { ...state, token: action.payload }
   default:
     return state
   }

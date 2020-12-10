@@ -1,12 +1,17 @@
 import React from 'react'
 import { BrowserRouter, Route  } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-import Login from 'src/screens/Login'
+import PublicRoutes from './PublicRoutes'
+import PrivateRoutes from './PrivateRoutes'
 
 function Routes () {
+  const { token } = useSelector(value => value.user)
+
   return (
     <BrowserRouter>
-      <Route component={Login} path="/" />
+      { !token && <Route path="/" component={PublicRoutes} /> }
+      { token && <Route path="/" component={PrivateRoutes} /> }
     </BrowserRouter>
   )
 }

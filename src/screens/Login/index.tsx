@@ -1,4 +1,5 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import Input from 'src/components/Input'
 import { Main } from './styles'
@@ -7,12 +8,16 @@ import Button from 'src/components/Button'
 import logo from 'src/img/logo.png'
 import reqres from 'src/services/reqres'
 
+import { getToken } from 'src/store/ducks/user/action'
+
 const baseCredentials = {
-  email: '',
-  password: ''
+  email: 'eve.holt@reqres.in',
+  password: 'cityslicka'
 }
 
 function Login () {
+  const dispatch = useDispatch()
+  const user = useSelector(value => value.user)
 
   const [credentials, setCredentials] = useState(baseCredentials)
   
@@ -24,10 +29,16 @@ function Login () {
   const handleSubmit = useCallback(async (event: React.FormEvent) => {
     event.preventDefault()
     
-    const { data } = await reqres.post('/login', credentials)
+    const { data: { token } } = await reqres.post('/login', credentials)
 
-    
-  }, [credentials])
+    dispatch(getToken(token))
+
+  }, [credentials, dispatch])
+
+
+  useEffect(() => {
+    console.log(user)
+  }, [user])
 
   return (
     <Main>
@@ -47,7 +58,10 @@ function Login () {
           onChange={handleChange}
           value={credentials.password}
         />
-        <Button fill>Acessar o sistema</Button>
+        <Button
+          type="submit" 
+          fill
+        >Acessar o sistema</Button>
       </form>
     </Main>
   )

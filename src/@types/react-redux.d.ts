@@ -1,4 +1,4 @@
-import { Store } from '../store/types'
+import { Store } from 'src/store'
 import 'react-redux'
 
 declare module 'react-redux' {

@@ -6,7 +6,7 @@ interface ButtonStylesProps {
 
 export const Button = styled.button.attrs((props: ButtonStylesProps) => ({ ...props }))`
   background: ${props => props.fill ? props.theme.colors.primary : ''};
-  width: 100%;
+  width: ${props => props.type === 'submit' ? '100%' : 'max-content'};
   padding: 1rem;
   border-radius: ${props => props.theme.sizes.borderRadius};
   color: ${props => props.fill ? props.theme.colors.background : props.theme.colors.color};
