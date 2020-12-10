@@ -8,7 +8,7 @@ function PublicRoutes () {
     <Switch>
       <Route path="/" component={Login} />
     </Switch>
-  )
+   )
 }
 
 export default PublicRoutes

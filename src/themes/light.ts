@@ -6,7 +6,7 @@ const light = {
     body: '#555',
     color: '#534C4C',
     background: '#fff',
-    foreground: '#E5E5E5',
+    foreground: '#F8FCFF',
     error: '#ff6b6b',
     success: '#1dd1a1',
     warn: '#feca57',
