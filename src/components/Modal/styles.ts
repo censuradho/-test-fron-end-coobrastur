@@ -40,5 +40,8 @@ export const Card = styled.div`
   padding: 1rem;
   max-width: max-content;
   animation: ${ScaleIn} .5s forwards;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
 `
 

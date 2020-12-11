@@ -55,6 +55,14 @@ export const CardList = styled.ul`
   }
 `
 
+export const Form = styled.form`
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+`
+
 export const Title = styled.div`
   display: flex;
   align-items: center;

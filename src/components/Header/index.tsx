@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import * as Styles from './styles'
@@ -13,6 +13,8 @@ import { resetToken } from 'src/store/ducks/user/action'
 
 function Header () {
   const dispatch = useDispatch()
+  const location = useLocation()
+
   const [isOpen, setIsOpen] = useState(false)
 
   const signOut = useCallback(() => {
@@ -23,6 +25,8 @@ function Header () {
 
   }, [dispatch])
 
+  if (location.pathname.match('/novo')) return null
+  
   return (
     <Styles.Container>
       <Link to="/">
@@ -35,8 +39,10 @@ function Header () {
         <ul>
           <li>
             <Styles.Add>
-              <img src={plus} alt="icone adicionar" />
-              novo cliente
+              <Link to="/novo">
+                <img src={plus} alt="icone adicionar" />
+                novo cliente
+              </Link>
             </Styles.Add>
           </li>
           <li>

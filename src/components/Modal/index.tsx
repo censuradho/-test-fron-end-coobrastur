@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 
 import * as Styles from './styles'
 
 interface ModalProps {
   visible?: boolean,
-  onClickOutside?: () => void
+  onClickOutside?: () => void,
+  children?: ReactElement[] | ReactElement
 }
 
 function Modal (props: ModalProps) {
@@ -12,7 +13,9 @@ function Modal (props: ModalProps) {
 
   return (
     <Styles.Container onClick={props?.onClickOutside}>
-      <Styles.Card onClick={event => event.stopPropagation()}></Styles.Card>
+      <Styles.Card onClick={event => event.stopPropagation()}>
+        {props?.children}
+      </Styles.Card>
     </Styles.Container>
   )
 }

@@ -3,6 +3,7 @@ import React, { useState, useCallback, useMemo, useEffect } from 'react'
 import Header from 'src/components/Header'
 import Button from 'src/components/Button'
 import Modal from 'src/components/Modal'
+import Input from 'src/components/Input'
 
 import * as Styles from './styles'
 
@@ -24,13 +25,16 @@ interface ApiUser {
   total_pages: number 
 }
 
+
+const baseCurrentUser = { name: '', job: '', id: 0 }
+
 function Clientes () {
   const [user, setUser] = useState<User[]>()
   const [page, setPage] = useState(1)
   const [length, setLength] = useState(0)
   const [totalPages, setTotalPages] = useState(0)
-
   const [editMode, setEditMode] = useState(false)
+  const [currentUser, setCurrentUser] = useState(baseCurrentUser)
 
   const getInitialUsers = useCallback(async (page) => {
     const { data } = await api.get<ApiUser>(`/users?page=${page}`)
@@ -59,12 +63,38 @@ function Clientes () {
 
     if (!confirm) return
 
+    setCurrentUser(baseCurrentUser)
     setEditMode(false)
   }, [])
 
-  const handleOpenEditMode = useCallback(() => {
+  const handleOpenEditMode = useCallback((id: number) => {
+    setCurrentUser(prevState => ({ ...prevState, id }))
     setEditMode(true)
   }, [])
+
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = event.target
+    setCurrentUser(prevState => ({ ...prevState, [name]: value }))
+  }, [])
+
+  const handleSubmit = useCallback(async (event: React.FormEvent) => {
+    event.preventDefault()
+    try {
+
+    const options = {
+      job: currentUser.job,
+      name: currentUser.name
+    }
+
+    const { data } = await api.post(`/user/${currentUser.id}`, options)
+
+    setCurrentUser(baseCurrentUser)
+    setEditMode(false)
+
+    alert('Salvo com sucesso!!!')
+    } catch (err) {}
+  
+  }, [currentUser])
 
   const renderCardItem = useMemo(() => user?.map(value => (
     <Styles.CardItem key={value.id}>
@@ -73,7 +103,7 @@ function Clientes () {
       <span>{value.email}</span>
       <Button 
         stroke
-        onClick={handleOpenEditMode}
+        onClick={() => handleOpenEditMode(value.id)}
       >Editar</Button>
     </Styles.CardItem>
   )), [user, handleOpenEditMode])
@@ -88,7 +118,26 @@ function Clientes () {
       <Modal 
         visible={editMode} 
         onClickOutside={handleCloseEditMode}
-      />
+      >
+        <Styles.Form onSubmit={handleSubmit}>
+          <Input 
+            label="Nome"
+            name="name"
+            value={currentUser.name}
+            onChange={handleChange}
+          />
+          <Input 
+            label="Profissão"
+            name="job"
+            value={currentUser.job}
+            onChange={handleChange}
+          />
+          <Button 
+            fill
+            type="submit"
+          >Alterar</Button>
+        </Styles.Form>
+      </Modal>
       <Styles.Main>
         <Styles.Container>
           <Styles.Title>

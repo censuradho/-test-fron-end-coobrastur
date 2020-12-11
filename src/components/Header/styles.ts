@@ -20,6 +20,8 @@ export const Nav = styled.nav.attrs((props: NavStyleProps) => ({ ...props}))`
   li + li {
     margin-top: 20px;
   }
+
+
 `
 
 export const Exit = styled.button`
@@ -51,10 +53,14 @@ export const Menu = styled.button`
 export const Add = styled.button`
   background: ${props => props.theme.colors.foreground};
   padding: .6rem;
-  display: flex;
-  align-items: center;
-  gap: .3rem;
   border-radius: ${props => props.theme.sizes.borderRadius};
+
+  a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+  }
 `
 
 export const Container = styled.header`
@@ -74,6 +80,7 @@ export const Container = styled.header`
   li {
     list-style: none;
   }
+
 
   @media (min-width: 760px) {
     ${Nav} {
