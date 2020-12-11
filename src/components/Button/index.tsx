@@ -4,6 +4,7 @@ import  * as Styles from './styles'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   fill?: boolean,
+  stroke?: boolean,
   children: ReactNode
 }
 

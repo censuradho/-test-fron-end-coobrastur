@@ -16,20 +16,24 @@ function Header () {
       <Link to="/">
         <img src={logo} alt="logo Coobrastur" />
       </Link>
-      <Styles.Exit>
-        <img src={exit} alt="icone sair" />
-        sair
-      </Styles.Exit>
-      <Styles.Menu onClick={() => setIsOpen(!isOpen)}>
+      <Styles.Menu onClick={() => setIsOpen(!isOpen )}>
         <img src={menu} alt="icone menu" />
       </Styles.Menu>
       <Styles.Nav state={isOpen}>
-        <li>
-          <button>
-            <img src={plus} alt="icone adicionar" />
-            novo cliente
-          </button>
-        </li>
+        <ul>
+          <li>
+            <Styles.Add>
+              <img src={plus} alt="icone adicionar" />
+              novo cliente
+            </Styles.Add>
+          </li>
+          <li>
+            <Styles.Exit>
+              <img src={exit} alt="icone sair" />
+              sair
+            </Styles.Exit>
+          </li>
+        </ul>
       </Styles.Nav>
     </Styles.Container>
   )

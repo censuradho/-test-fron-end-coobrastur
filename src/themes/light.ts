@@ -10,7 +10,8 @@ const light = {
     error: '#ff6b6b',
     success: '#1dd1a1',
     warn: '#feca57',
-    border: '#D9D9D9'
+    border: '#D9D9D9',
+    disabled: '#ccc'
   },
   sizes: {
     borderRadius: '10px'

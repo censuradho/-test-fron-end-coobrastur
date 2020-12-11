@@ -14,6 +14,7 @@ declare module 'styled-components' {
       success: string,
       warn: string,
       border: string,
+      disabled: string,
     },
     sizes: {
       borderRadius: string;

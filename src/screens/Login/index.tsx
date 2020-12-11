@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Input from 'src/components/Input'
 import { Main } from './styles'
 import Button from 'src/components/Button'
+import Loader from 'src/components/ActivityIndicator'
 
 import logo from 'src/img/logo.png'
 import reqres from 'src/services/reqres'
@@ -19,6 +20,8 @@ function Login () {
   const dispatch = useDispatch()
   const user = useSelector(value => value.user)
 
+  const [loading, setLoading] = useState(false)
+
   const [credentials, setCredentials] = useState(baseCredentials)
   
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) =>  {
@@ -29,9 +32,16 @@ function Login () {
   const handleSubmit = useCallback(async (event: React.FormEvent) => {
     event.preventDefault()
     
-    const { data: { token } } = await reqres.post('/login', credentials)
+    try {
+      setLoading(true)
+      const { data: { token } } = await reqres.post('/login', credentials)
 
-    dispatch(getToken(token))
+      dispatch(getToken(token))
+    } 
+    catch (err) {}
+    finally {
+      setLoading(false)
+    }
 
   }, [credentials, dispatch])
 
@@ -61,7 +71,10 @@ function Login () {
         <Button
           type="submit" 
           fill
-        >Acessar o sistema</Button>
+          disabled={loading}
+        >
+          { loading ? <Loader /> : 'Acessar o sistema' }
+        </Button>
       </form>
     </Main>
   )
