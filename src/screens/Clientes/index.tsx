@@ -47,7 +47,7 @@ function Clientes () {
     setPage(prevState => prevState + 1)
   }, [nextBlock])
 
-  const backBlock = useMemo(() => (page === 0), [page])
+  const backBlock = useMemo(() => (page === 1), [page])
 
   const back = useCallback(() => {
     if (backBlock) return;

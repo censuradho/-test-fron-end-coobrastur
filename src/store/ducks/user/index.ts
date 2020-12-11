@@ -7,6 +7,8 @@ const reducerUser: Reducer<UserData> = (state = baseUser, action) => {
   switch (action.type) {
   case UserTypes.GET_TOKEN:
     return { ...state, token: action.payload }
+  case UserTypes.RESET_TOKEN:
+    return { ...state, token: '' }
   default:
     return state
   }

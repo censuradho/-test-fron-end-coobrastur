@@ -6,3 +6,7 @@ export function getToken (token: string) {
     payload: token
   }
 }
+
+export function resetToken () {
+  return { type: UserTypes.RESET_TOKEN }
+}
