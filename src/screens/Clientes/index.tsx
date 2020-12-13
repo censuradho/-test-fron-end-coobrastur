@@ -4,10 +4,12 @@ import Header from 'src/components/Header'
 import Button from 'src/components/Button'
 import Modal from 'src/components/Modal'
 import Input from 'src/components/Input'
+import Loading from 'src/components/ActivityIndicator'
 
 import * as Styles from './styles'
+import { Title } from 'src/themes/GlobalStyles'
 
-import perfil from 'src/img/perfil.svg'
+import perfil from 'src/img/user.svg'
 
 import api from 'src/services/reqres'
 
@@ -35,8 +37,9 @@ function Clientes () {
   const [totalPages, setTotalPages] = useState(0)
   const [editMode, setEditMode] = useState(false)
   const [currentUser, setCurrentUser] = useState(baseCurrentUser)
+  const [loading, setLoading] = useState(false)
 
-  const getInitialUsers = useCallback(async (page) => {
+  const getUsers = useCallback(async (page) => {
     const { data } = await api.get<ApiUser>(`/users?page=${page}`)
     setUser(data.data)
     setLength(data.total)
@@ -80,20 +83,25 @@ function Clientes () {
   const handleSubmit = useCallback(async (event: React.FormEvent) => {
     event.preventDefault()
     try {
+      setLoading(true)
+      const options = {
+        job: currentUser.job,
+        name: currentUser.name
+      }
 
-    const options = {
-      job: currentUser.job,
-      name: currentUser.name
+      await api.post(`/user/${currentUser.id}`, options)
+
+      getUsers(page)
+
+      setCurrentUser(baseCurrentUser)
+      setEditMode(false)
+
+      alert('Salvo com sucesso!!!')
+    } 
+    catch (err) {}
+    finally {
+      setLoading(false)
     }
-
-    const { data } = await api.post(`/user/${currentUser.id}`, options)
-
-    setCurrentUser(baseCurrentUser)
-    setEditMode(false)
-
-    alert('Salvo com sucesso!!!')
-    } catch (err) {}
-  
   }, [currentUser])
 
   const renderCardItem = useMemo(() => user?.map(value => (
@@ -104,13 +112,15 @@ function Clientes () {
       <Button 
         stroke
         onClick={() => handleOpenEditMode(value.id)}
-      >Editar</Button>
+      >
+        Editar
+      </Button>
     </Styles.CardItem>
   )), [user, handleOpenEditMode])
 
   useEffect(() => {
-    getInitialUsers(page)
-  }, [getInitialUsers, page])
+    getUsers(page)
+  }, [getUsers, page])
 
   return (
     <>
@@ -125,25 +135,31 @@ function Clientes () {
             name="name"
             value={currentUser.name}
             onChange={handleChange}
+            required
           />
           <Input 
             label="Profissão"
             name="job"
             value={currentUser.job}
             onChange={handleChange}
+            required
           />
           <Button 
             fill
             type="submit"
-          >Alterar</Button>
+            disabled={loading}
+          >
+              { !loading && 'Alterar' }
+            { loading && <Loading /> }
+          </Button>
         </Styles.Form>
       </Modal>
       <Styles.Main>
         <Styles.Container>
-          <Styles.Title>
+          <Title>
             <img src={perfil} alt="icon perfil" />
             <strong>Painel de clientes</strong>
-          </Styles.Title>
+          </Title>
           <Styles.Text>Página atual: {page}</Styles.Text>
           <Styles.CardList>
             { renderCardItem }

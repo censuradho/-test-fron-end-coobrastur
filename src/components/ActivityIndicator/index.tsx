@@ -62,4 +62,4 @@ function ActivityIndicator (props: ActivityIndicatorProps) {
   )
 }
 
-export default ActivityIndicator
+export default React.memo(ActivityIndicator)

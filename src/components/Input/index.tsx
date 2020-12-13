@@ -15,4 +15,4 @@ function Input ({ label, ...props }: InputProps) {
   ) 
 }
 
-export default Input
+export default React.memo(Input)

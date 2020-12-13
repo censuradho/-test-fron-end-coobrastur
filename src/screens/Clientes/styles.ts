@@ -63,20 +63,6 @@ export const Form = styled.form`
   flex-wrap: wrap;
 `
 
-export const Title = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-  img {
-    width: 30px;
-  }
-  strong {
-    color: ${props => props.theme.colors.primary};
-    font-size: 1.4rem
-  }
-`
-
 export const Controllers = styled.div`
   display: flex;
   align-items: center;

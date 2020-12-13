@@ -19,4 +19,4 @@ function Button ({ fill, children,...props}: ButtonProps) {
   )
 }
 
-export default Button
+export default React.memo(Button)

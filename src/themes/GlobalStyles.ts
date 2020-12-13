@@ -21,6 +21,10 @@ const GlobalStyles = createGlobalStyle`
     text-transform: uppercase;
     cursor: pointer;
   }
+
+  form {
+    width: 100%;
+  }
 `
 
 export const Container = styled.div`
@@ -30,3 +34,17 @@ export const Container = styled.div`
 `
 
 export default GlobalStyles
+
+export const Title = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  img {
+    width: 30px;
+  }
+  strong {
+    color: ${props => props.theme.colors.primary};
+    font-size: 1.4rem
+  }
+`

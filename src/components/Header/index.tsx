@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import React, { useCallback, useState, useMemo } from 'react'
+import { Link, useLocation, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import * as Styles from './styles'
@@ -14,19 +14,29 @@ import { resetToken } from 'src/store/ducks/user/action'
 function Header () {
   const dispatch = useDispatch()
   const location = useLocation()
+  const history = useHistory()
 
   const [isOpen, setIsOpen] = useState(false)
-
+  
   const signOut = useCallback(() => {
     const confirm = window.confirm('Deseja mesmo sair?')
-
+    
     if (!confirm) return;
     dispatch(resetToken())
+    history.push('/')
+  }, [dispatch, history])
 
-  }, [dispatch])
+  const renderAddCliente = useMemo(() => !location.pathname.match('/registrar') && (
+    <li>
+      <Styles.Add>
+        <Link to="/registrar">
+          <img src={plus} alt="icone adicionar" />
+          novo cliente
+        </Link>
+      </Styles.Add>
+    </li>
+  ), [location])
 
-  if (location.pathname.match('/novo')) return null
-  
   return (
     <Styles.Container>
       <Link to="/">
@@ -37,14 +47,7 @@ function Header () {
       </Styles.Menu>
       <Styles.Nav state={isOpen}>
         <ul>
-          <li>
-            <Styles.Add>
-              <Link to="/novo">
-                <img src={plus} alt="icone adicionar" />
-                novo cliente
-              </Link>
-            </Styles.Add>
-          </li>
+          { renderAddCliente }
           <li>
             <Styles.Exit onClick={signOut}>
               <img src={exit} alt="icone sair" />
@@ -57,4 +60,4 @@ function Header () {
   )
 }
 
-export default Header
+export default React.memo(Header)
