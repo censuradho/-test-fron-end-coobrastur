@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route  } from 'react-router-dom'
+import { BrowserRouter, Route, Redirect  } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import PublicRoutes from './PublicRoutes'
@@ -10,6 +10,7 @@ function Routes () {
 
   return (
     <BrowserRouter>
+      { !token && <Redirect to={{ pathname: '/' }} /> }
       { !token && <Route path="/" component={PublicRoutes} /> }
       { token && <Route path="/" component={PrivateRoutes} /> }
     </BrowserRouter>
