@@ -45,11 +45,6 @@ function Login () {
 
   }, [credentials, dispatch])
 
-
-  useEffect(() => {
-    console.log(user)
-  }, [user])
-
   return (
     <Main>
       <img src={logo} alt="logo Coobrastur" />
