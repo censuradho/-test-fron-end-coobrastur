@@ -1,46 +1,68 @@
-# Getting Started with Create React App
+![coobrastur](https://user-images.githubusercontent.com/49209628/102014372-58a90e00-3d34-11eb-873f-cb931ef83473.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Teste para FrontEnd Coobrastur Turismo
 
-In the project directory, you can run:
+Objetivo deste teste é avaliar seus conhecimentos em front end como organização, estilo, boas práticas e habilidades .
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### O Desafio
+ 
+ 
+## Uma página de lista de clientes:
+ 
+- A partir da lista, deverá ser possível editar um cliente.
+	- Nome;
+	- Foto do perfil;
+	- E-mail;
 
-### `yarn test`
+## Uma página para cadastrar um novo cliente:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Os seguintes dados devem ser apresentados na página:
+	- Nome;
+	- Profissão;
+ 
+ 
+Layout das páginas:
+> FIGMA https://www.figma.com/file/1dQIYtGQfjTZdnaif25sNt/Teste-Front-end-Coobrastur?node-id=2%3A106
 
-### `yarn build`
+> DOWNLOAD LAYOUT https://drive.google.com/file/d/1MRsjMd5MkAMxgLbR5MvbXwP4jT0xuLIK/view?usp=sharing
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  
+API para desenvolvimento da aplicação:
+> https://reqres.in/
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+ 
+  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Requisitos
 
-### `yarn eject`
+  
+* HTML
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* CSS (pré-processador a sua escolha)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* JavaScript (React ou Angular)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* Desenvolver a página conforme o layout apresentado;
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* Responsivo;
 
-## Learn More
+* Usar um sistema de controle de versão para entregar o teste (Github, Bitbucket, ...)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+
+### O que será diferencial 
+
+* Feedbacks visuais para o usuário;
+
+* HTML semântico;
+
+* CSS bem estruturado;
+
+* Código limpo e bem organizado;
+
+* Componentização das páginas;
+
+* Uso de Redux ou Context API;
