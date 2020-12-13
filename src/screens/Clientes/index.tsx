@@ -84,12 +84,13 @@ function Clientes () {
     event.preventDefault()
     try {
       setLoading(true)
+
       const options = {
         job: currentUser.job,
         name: currentUser.name
       }
 
-      await api.post(`/user/${currentUser.id}`, options)
+      await api.patch(`/user/${currentUser.id}`, options)
 
       getUsers(page)
 
@@ -102,7 +103,7 @@ function Clientes () {
     finally {
       setLoading(false)
     }
-  }, [currentUser])
+  }, [currentUser, getUsers, page])
 
   const renderCardItem = useMemo(() => user?.map(value => (
     <Styles.CardItem key={value.id}>
